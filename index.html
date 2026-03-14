@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestWorld · донат магазин</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0a0a0f;
+            color: #f0eaff;
+            line-height: 1.5;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* фиолетовое свечение */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(140, 0, 255, 0.12) 0%, transparent 45%),
+                        radial-gradient(circle at 80% 70%, rgba(100, 0, 200, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding: 1rem 2rem;
+            background: rgba(10, 5, 20, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 60px;
+            border: 1px solid #4a2a7a;
+            box-shadow: 0 20px 35px -12px #000000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .server-icon {
+            font-size: 2.4rem;
+            color: #c77dff;
+            filter: drop-shadow(0 0 10px #aa44ff);
+        }
+
+        .server-name {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0e4ff, #cf9eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            background: #120b1f;
+            padding: 0.6rem 2rem;
+            border-radius: 40px;
+            border: 1px solid #6230a0;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: #d9c7ff;
+        }
+
+        .stat-item i {
+            color: #bd7cff;
+        }
+
+        /* МЕНЮ */
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            background: rgba(15, 8, 25, 0.8);
+            padding: 0.5rem;
+            border-radius: 48px;
+            border: 1px solid #4a2e70;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #bda4e6;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.6rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn i {
+            color: #b47aff;
+        }
+
+        .nav-btn:hover {
+            background: #2e1b4a;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: #732ad4;
+            color: white;
+            box-shadow: 0 0 18px #9f4eff;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin: 1rem 0 3rem;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #ffffff, #e1b5ff, #cf8cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1.5px;
+            filter: drop-shadow(0 0 25px #7733ff80);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #ccb5f0;
+        }
+
+        /* Категории */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 2.5rem 0 3rem;
+        }
+
+        .cat-btn {
+            background: rgba(20, 10, 35, 0.8);
+            backdrop-filter: blur(6px);
+            border: 1px solid #5d3891;
+            color: #d7befa;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cat-btn i {
+            color: #be87ff;
+        }
+
+        .cat-btn:hover {
+            background: #351f55;
+            color: white;
+            transform: translateY(-3px);
+            border-color: #b36eff;
+        }
+
+        .cat-btn.active {
+            background: #812cf0;
+            border-color: #d09eff;
+            color: white;
+            box-shadow: 0 0 22px #ae63ff;
+        }
+
+        /* Сетка привилегий */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: rgba(12, 6, 22, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #532f8a;
+            border-radius: 36px;
+            padding: 2rem 1.8rem;
+            transition: all 0.3s;
+            box-shadow: 0 25px 35px -15px #000000;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #b168ff;
+            box-shadow: 0 30px 50px -15px #732ad6;
+            background: #150c26;
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #d19eff, #a34dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f2e2ff;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #3e2660;
+            padding-top: 1.3rem;
+            margin-top: auto;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f2dc8d;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .price small {
+            font-size: 1rem;
+            color: #b197cf;
+            margin-left: 5px;
+            font-weight: 500;
+        }
+
+        .price-from {
+            font-size: 1.1rem;
+            color: #b197cf;
+            margin-right: 5px;
+            font-weight: 500;
+            text-transform: lowercase;
+        }
+
+        .buy-btn {
+            background: linear-gradient(145deg, #5d2aa0, #301755);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.7rem 1.6rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #a169e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(145deg, #7d3fd9, #48237a);
+            border-color: #daa6ff;
+            box-shadow: 0 0 20px #b45aff;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #140b22;
+            border: 2px solid #8a4fff;
+            border-radius: 50px;
+            padding: 2.5rem;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 0 60px #9f4eff;
+            animation: modalAppear 0.3s;
+        }
+
+        @keyframes modalAppear {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, #d0a5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal h3 {
+            color: #c7a5ff;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .modal-option {
+            background: #1f1133;
+            border: 1px solid #5f3c9e;
+            border-radius: 30px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-option:hover {
+            background: #2e1b4f;
+            border-color: #ad6eff;
+            transform: scale(1.02);
+        }
+
+        .modal-option.selected {
+            background: #4f2b9e;
+            border-color: #e3a6ff;
+            box-shadow: 0 0 20px #b77eff;
+        }
+
+        .modal-option span:first-child {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .modal-option span:last-child {
+            color: #f2dc8d;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: #1f1133;
+            border: 1px solid #5f3c9e;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .modal-input:focus {
+            border-color: #b77eff;
+            box-shadow: 0 0 15px #a35eff;
+        }
+
+        .modal-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-row .modal-input {
+            flex: 1;
+        }
+
+        .modal-pay {
+            background: linear-gradient(145deg, #8c40ff, #5219b3);
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding: 1rem;
+            border-radius: 60px;
+            width: 100%;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #cf9eff;
+            box-shadow: 0 0 25px #a64dff;
+        }
+
+        .modal-pay:hover {
+            background: linear-gradient(145deg, #a45dff, #6f2ad6);
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #c58cff;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid #7851c2;
+            color: #c7a5ff;
+            font-weight: 600;
+            padding: 0.7rem;
+            border-radius: 40px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #2e1a4a;
+            color: white;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin: 3rem 0 2rem;
+            padding: 2rem 2.5rem;
+            border-radius: 80px;
+            background: rgba(15, 8, 27, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid #603c96;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #dbc6ff;
+        }
+
+        .feature i {
+            font-size: 2rem;
+            background: linear-gradient(145deg, #ac6eff, #cc99ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding: 1.8rem 0 0;
+            color: #9075b9;
+            border-top: 1px solid #3a2660;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer a {
+            color: #c39eff;
+            text-decoration: none;
+        }
+
+        /* Адаптация */
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 2rem;
+            }
+            .price {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ШАПКА (без поля ника) -->
+        <header class="header">
+            <div class="logo-area">
+                <i class="fas fa-cube server-icon"></i>
+                <span class="server-name">BestWorld</span>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item"><i class="fas fa-users"></i> 1,482 online</div>
+                <div class="stat-item"><i class="fas fa-globe"></i> play.bestworld.ru</div>
+            </div>
+
+            <div class="nav-menu">
+                <button class="nav-btn active"><i class="fas fa-shop"></i> Магазин</button>
+                <button class="nav-btn"><i class="fas fa-headset"></i> Поддержка</button>
+                <button class="nav-btn"><i class="fas fa-scroll"></i> Правила</button>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Магазин доната</h1>
+            <p>поддержи сервер — получи уникальные возможности 🎉</p>
+        </section>
+
+        <!-- Привилегии (8 штук, только название и цена от) -->
+        <div class="shop-grid" id="shopGrid"></div>
+
+        <!-- Преимущества -->
+        <div class="features">
+            <div class="feature"><i class="fas fa-bolt"></i> Мгновенная выдача</div>
+            <div class="feature"><i class="fas fa-shield-halved"></i> Защита покупок</div>
+            <div class="feature"><i class="fas fa-gift"></i> +15% к первым донатам</div>
+            <div class="feature"><i class="fas fa-clock"></i> 24/7 поддержка</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>© 2025 BestWorld · All rights reserved.</div>
+            <div>
+                <a href="#"><i class="fab fa-discord"></i> .gg/bestworld</a> · 
+                <a href="#">правила</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО (покупка) -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <h2 id="modalTitle">Prime</h2>
+            <h3>Выберите срок</h3>
+            
+            <!-- Варианты срока (обновляются через JS) -->
+            <div class="modal-option" data-term="1 месяц" data-price="149">
+                <span>1 месяц</span>
+                <span>149 ₽</span>
+            </div>
+            <div class="modal-option" data-term="3 месяца" data-price="349">
+                <span>3 месяца</span>
+                <span>349 ₽</span>
+            </div>
+            <div class="modal-option" data-term="Навсегда" data-price="749">
+                <span>Навсегда</span>
+                <span>749 ₽</span>
+            </div>
+
+            <!-- Поле для ника -->
+            <input type="text" class="modal-input" id="modalNick" placeholder="Ваш никнейм" maxlength="20">
+
+            <!-- Поле для промокода -->
+            <div class="modal-row">
+                <input type="text" class="modal-input" id="modalPromo" placeholder="Промокод (если есть)">
+            </div>
+
+            <!-- Кнопка оплаты -->
+            <button class="modal-pay" id="modalPay">💳 Оплатить</button>
+            <button class="modal-close" id="modalClose">✕ Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 8 привилегий с правильными ценами
+            const products = [
+                { id:1, name:'Prime', price1:149, price3:349, priceForever:749, icon:'fa-crown' },
+                { id:2, name:'Ultra', price1:299, price3:699, priceForever:1499, icon:'fa-bolt' },
+                { id:3, name:'Spark', price1:499, price3:1199, priceForever:2599, icon:'fa-fire' },
+                { id:4, name:'Neo', price1:749, price3:1799, priceForever:3999, icon:'fa-gem' },
+                { id:5, name:'Fusion', price1:1099, price3:2699, priceForever:5999, icon:'fa-atom' },
+                { id:6, name:'Nova', price1:1599, price3:3999, priceForever:8999, icon:'fa-star' },
+                { id:7, name:'Xenon', price1:2299, price3:5799, priceForever:12499, icon:'fa-meteor' },
+                { id:8, name:'Best', price1:3499, price3:8999, priceForever:14999, icon:'fa-crown' }
+            ];
+
+            const grid = document.getElementById('shopGrid');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalNick = document.getElementById('modalNick');
+            const modalPromo = document.getElementById('modalPromo');
+            const modalPay = document.getElementById('modalPay');
+            const modalClose = document.getElementById('modalClose');
+            const termOptions = document.querySelectorAll('.modal-option');
+            
+            let currentProduct = null;
+            let selectedTerm = '1 месяц';
+            let selectedPrice = 149;
+
+            // Отрисовка карточек с правильным отображением "от X ₽"
+            function renderProducts() {
+                let html = '';
+                products.forEach(p => {
+                    html += `
+                        <div class="product-card" data-id="${p.id}">
+                            <i class="fas ${p.icon} product-icon"></i>
+                            <div class="product-title">${p.name}</div>
+                            <div class="product-footer">
+                                <div class="price">
+                                    <span class="price-from">от</span> ${p.price1} <small>₽</small>
+                                </div>
+                                <button class="buy-btn" onclick="openModal(${p.id})">
+                                    <i class="fas fa-cart-plus"></i> Купить
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                grid.innerHTML = html;
+            }
+
+            // Открыть модалку с привилегией
+            window.openModal = function(id) {
+                currentProduct = products.find(p => p.id === id);
+                if (!currentProduct) return;
+                
+                modalTitle.textContent = currentProduct.name;
+                
+                // Обновляем цены в опциях
+                termOptions[0].querySelector('span:last-child').textContent = currentProduct.price1 + ' ₽';
+                termOptions[0].dataset.price = currentProduct.price1;
+                
+                termOptions[1].querySelector('span:last-child').textContent = currentProduct.price3 + ' ₽';
+                termOptions[1].dataset.price = currentProduct.price3;
+                
+                termOptions[2].querySelector('span:last-child').textContent = currentProduct.priceForever + ' ₽';
+                termOptions[2].dataset.price = currentProduct.priceForever;
+                
+                // Сброс выбора на 1 месяц
+                termOptions.forEach(opt => opt.classList.remove('selected'));
+                termOptions[0].classList.add('selected');
+                selectedTerm = '1 месяц';
+                selectedPrice = currentProduct.price1;
+                
+                // Очистка полей
+                modalNick.value = '';
+                modalPromo.value = '';
+                
+                modalOverlay.classList.add('active');
+            };
+
+            // Выбор срока
+            termOptions.forEach(opt => {
+                opt.addEventListener('click', function() {
+                    termOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    selectedTerm = this.querySelector('span:first-child').textContent;
+                    selectedPrice = parseInt(this.dataset.price);
+                });
+            });
+
+            // Кнопка оплаты
+            modalPay.addEventListener('click', function() {
+                const nick = modalNick.value.trim();
+                
+                if (!nick) {
+                    alert('✨ Введите ваш никнейм!');
+                    return;
+                }
+                
+                const promo = modalPromo.value.trim();
+                const promoText = promo ? `\nПромокод: ${promo}` : '';
+                
+                alert(`✅ Покупка привилегии "${currentProduct.name}"\nСрок: ${selectedTerm}\nЦена: ${selectedPrice} ₽\nНикнейм: ${nick}${promoText}\n\nСпасибо за поддержку BestWorld!`);
+                
+                modalOverlay.classList.remove('active');
+            });
+
+            // Закрыть модалку
+            modalClose.addEventListener('click', function() {
+                modalOverlay.classList.remove('active');
+            });
+
+            // Закрыть по клику на фон
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('active');
+                }
+            });
+
+            // Меню навигация (демо)
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (this.textContent.includes('Поддержка')) {
+                        alert('🛠 Поддержка: напишите в Discord .gg/bestworld');
+                    } else if (this.textContent.includes('Правила')) {
+                        alert('📜 Правила: не использовать читы, уважать игроков.');
+                    }
+                });
+            });
+
+            renderProducts();
+        })();
+    </script>
+</body>
+</html>
